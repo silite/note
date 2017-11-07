@@ -1,0 +1,61 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>jquery鼠标点击自定义下拉框插件 - 站长素材</title>
+<link href="dropdownlist.css" rel="stylesheet" type="text/css">
+<script src="js/jquery-1.8.3.min.js"></script>
+<script src="js/dropdownlist.js"></script>
+<script>
+$(function(){
+    // 通过JSON数据创建自定义下拉框
+    var ddl_album = DropDownList.create({
+        container :$('#demo1'),
+        attrs : {
+            id : 'ddl_album',   // 给dropdownlist一个id
+            column :5,         // 展示4行
+            width:200,         // 宽度为150px
+            height: 30          // 每个option选项的高度
+        },	
+        options : [
+            ['默认相册','001'],
+            ['我的收藏','002'],
+            ['大学同学','003',true],
+            ['亲朋好友','004'],
+            ['明星们','005'],
+            ['狗仔队','006'],
+        ]
+		
+    });
+	ddl_album.change(function(){
+		alert(ddl_album.val());
+	});
+	
+
+    // 通过原生select控件创建自定义下拉框
+    var ddl_picture = DropDownList.create({
+        select:$('#demo2'),
+        attrs:{
+            column :5,
+            width :200,
+			
+        }
+    });
+	ddl_picture.change(function(){
+		alert(ddl_picture.val());
+	});
+});    
+</script>
+</head>
+<body>
+<div class="sucaijiayuan">
+<p>通过JSON数据创建自定义下拉框<span id="demo1"></span></p>
+<p>通过select标签创建自定义下拉框<span><select id="demo2"><option value="1">站长素材</option><option value="2">JS代码</option><option value="3">PSD素材</option><option value="4">矢量素材</option><option value="5">图片素材</option></select></span></p>
+</div>
+
+<div style="text-align:center;margin:150px 0; font:normal 14px/24px 'MicroSoft YaHei';">
+<p>适用浏览器：IE8、360、FireFox、Chrome、Safari、Opera、傲游、搜狗、世界之窗. </p>
+<p>来源：<a href="http://sc.chinaz.com/" target="_blank">站长素材</a></p>
+</div>
+</body>
+</html>
