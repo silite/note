@@ -1,1 +1,0 @@
-"C:\Program Files (x86)\Microsoft Visual Studio\Shared\Python36_64\Scripts\pyuic5.exe" D:\Pro\Py\TCPro\1.ui -o D:\Pro\Py\TCPro\TheMainLayerStyle.py
