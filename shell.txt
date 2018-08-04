@@ -1,0 +1,13 @@
+yum install httpd
+systemctl start httpd
+systemctl enable httpd
+yum install php
+vim /etc/httpd/conf/httpd.conf
+#change homepage
+service httpd restart
+# root /var/www/html
+yum install git
+ssh-keygen -t rsa -C "lemnsilite@gmail.com"
+#The GitHub SSH Keys is ~/.ssh/id_rsa.pub
+ssh -T git@github.com
+git clone (The Git Pro Url)
