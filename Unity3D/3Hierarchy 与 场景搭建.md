@@ -101,11 +101,61 @@ Hierarchy 与 场景搭建
 `第六个按钮:` 添加草地
 `第七个按钮:` 
 
-*   Pixel Error: 图层与地形的精度
-*   Base Map Dist.: 贴图可视距离，相比直接导入地形fbx，不需要添加leave of detail
-*   Cast Shadows: 地形是否有阴影
-*   Material: 地形贴图材质
-*   Physics Material: 地形物理材质
-*   Wind Settings: 
-   *   Grass Tint: 随风摆动时，草地颜色的变化  
-*   Resolution: 设置整个地形的分辨率，用于整个场景的优化 
+*   **Pixel Error:** 图层与地形的精度
+*   **Base Map Dist.:** 贴图可视距离，相比直接导入地形fbx，不需要添加leave of detail
+*   **Cast Shadows:** 地形是否有阴影
+*   **Material:** 地形贴图材质
+*   **Physics Material:** 地形物理材质
+*   **Wind Settings:** 
+   *   *Grass Tint:* 随风摆动时，草地颜色的变化  
+*   **Resolution:** 设置整个地形的分辨率，用于整个场景的优化 
+*   **Heightmap:** 导入导出地图模型
+### 树木生成器与风区
+>Create->Tree会在Assets中生成树木对应的Prefab文件  
+
+*   **Tree窗口右下有4个按钮:**
+   *   *Add Leaf Group:* 创建新的树叶
+   *   *Add Branch Group:* 创建新的树枝，点击树枝的根部可以移动树枝
+   *   *Duplicate Selected Group:* 复制当前选项
+   *   *Delete Selected Group:* 删除   
+*   **Tree窗口下方选中树枝时有3个按钮:**
+   *   *Move Branch:* 平移树枝
+   *   *Rotate Branch:* 旋转树枝
+   *   *Free Hand:* 笔刷，可以画出树枝的样子，选中节点后可以在此节点为起点继续画树枝
+*   **Geometry:**
+   *   *Branch Meterial:* 树干材质
+*   **Shape:**
+   *   *Length:* 树木长度      
+   *   *Radius:* 树干粗细
+   *   *Crinkliness:* 弯曲程度
+*   **Wind:**
+   *   *Create Wind Zone:* 创建风区，还可以在Create菜单中创建，Ctrl+Shift+F可以将风向与视角一致
+*   **Wind Zone:**
+   *   *Mode:*
+      *   Directional: 方向风
+      *   Spherical: 区域风      
+   *   *Wind Main:* 风力
+   *   *Wind Pulse Frequence:* 风的频率    
+>打开Pertical System的External Forces，还可以影响粒子效果  
+
+### Cloth 布料
+*   **Interactive Cloth:** 对布料的展现效果进行详细的编辑
+   *   *Bending Stiffness:* 弯曲硬度
+   *   *Stretching Stiffness:* 拉伸硬度
+   *   *Damping:* 阻尼系数
+   *   *Thickness:* 布料厚度
+   *   *Use Gravity:* 是否使用重力
+   *   *Self Collision:* 是否与本身碰撞
+   *   *External Acceleration:* 外部加速度
+   *   *Random Acceleration:* 随机加速度
+   *   *Mesh:* 布料的模型
+
+### Audio Reverb Zone 音频混响滤波器
+>模拟声音在不同区域的衰减以及衍射效果
+
+*  Audio Reverb Zone:
+   *   Min Distance: 从声音原点到此位置音源完全保真
+   *   Max Distance: 声音的衰减区，超过此位置声音将会消失
+   *   Reverb Preset: 声音效果
+### Ragdoll 布娃娃
+>模拟死人的随机效果，原理是判断人物死亡的一瞬间，绑定在人物身上的布娃娃就会生效，替换到原来的角色，在其身上绑定了许多物理关节，当它出现时，这些物理关节会自然的下落，并且能和场景内的其他物体产生碰撞，从而达到仿真的效果
