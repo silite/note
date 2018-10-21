@@ -38,6 +38,7 @@ git 分支
 `git branch -r` 查看远程分支
 `git checkout [name]` 切换分支  
 `git tag "[name]" [HASH]` 创建tag，可以用来切换历史版本分支，不用查看history  
+`git tag -a [name] -m[msg]` 创建一个带有注解的tag
 `git tag` 查看所有tag  
 `git show [branch_name/HEAD/HASH/tag_name]` 来查看分支内容  
 `git checkout -b [new_branch_name]` 创建新分支并立即切换到新分支  
@@ -62,3 +63,29 @@ git 分支
 `git checkou HEAD -- [name]` 还原到最新的提交到工作区
 `#git reset HEAD [name]` 用历史提交还原缓存区
 `git diff --cached` 查看与暂存区的内容
+
+git 远程协作
+---
+### 生成SSH Keys
+`ssh-keygen -t rsa -C "[e-mail]"` 回车后输入SSH的密码  
+`eval "$(ssh-agent -s)"` win只输入括号中命令即可  
+`ssh-add ~/.ssh/id_rsa`  
+`vim ~/.ssh.id_rsa.pub` 里即为key的内容  
+`ssh -T git@github.com` 回车后yes  
+
+git 远程协作的主要命令
+---
+`git fetch` 来获取远程仓库中的新的数据  
+`git log --oneline --decorate --graph --all` 来查看记录  
+`git merge origin/master` 来将HEAD指针移到origin/master分支  
+`git pull` 即为fetch和merge的操作合并   
+`git push --tags` 推送tag  
+`git pull origin [branch_name]` 拉取分支  
+`git push origin [branch_name]`  
+`git branch -d [branch_name]` 删除本地分支  
+`git push --delete origin [branch_name]`  
+`git remote add upstream [URL]` 获取fork源  
+`git remote -v`  然后pull对应upstream即可拉下fork源的代码  
+`git remote rename upstream [new_name]`  修改upstream名字
+`git remote rm upstream`  删除upstream
+>PR未被关闭时，所有对应的commit一直会更新
