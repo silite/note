@@ -1,0 +1,36 @@
+<!-- v-if v-show -->
+<!-- 一般来说，v-if有更高的切换消耗，
+     而v-show有更高的初始渲染消耗
+
+     if控制的元素会被移除
+     show控制的元素会被display: none;
+
+     如果切换后永远不想让用户看到 推荐使用if
+     -->
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="../lib/vue.js"></script>
+</head>
+<body>
+<div id="app">
+  <h3 v-if="flag"> if </h3>
+  <h3 v-show="flag"> show </h3>
+  <input type="button" value="toggle" @click="flag = !flag" style="width: 300px;">
+</div>
+</body>
+<script>
+  var vm = new Vue({
+    el: '#app',
+    data: {
+      flag: true
+    },
+    methods: {}
+  })
+</script>
+</html>

@@ -1,0 +1,53 @@
+<!-- 通过属性绑定为元素设置class样式 -->
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    .red{
+      color: red;
+    }
+    .thin{
+      font-weight: 200;
+    }
+    .italic{
+      font-style: italic;
+    }
+    .active{
+      letter-spacing: 0.5em;
+      /*word-spacing: ;  英文*/
+    }
+  </style>
+  <script src="../lib/vue.js"></script>
+</head>
+<body>
+<div id="app">
+  <!-- 数组传递class方式 -->
+  <h1 :class="['thin', 'italic']">哔哩哔哩</h1>
+
+  <!-- 三元表达式传递class -->
+  <h1 :class="['thin', 'italic', flag ? 'active' : '']">哔哩哔哩</h1>
+
+  <!-- 三元表达式换为对象的形式 -->
+  <h1 :class="['thin', 'italic', {'active':flag}]">哔哩哔哩</h1>
+
+  <!-- 直接使用对象，对象属性可带可不带引号 -->
+  <h1 :class="obj">哔哩哔哩</h1>
+
+</div>
+</body>
+<script>
+  var vm = new Vue({
+    el: '#app',
+    data: {
+      flag: true,
+      obj: {thin: true, red: true}
+    },
+    methods: {}
+  })
+</script>
+</html>
