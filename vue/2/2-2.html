@@ -1,0 +1,36 @@
+<!-- 简易Vue全局过滤器 -->
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="../lib/vue.js"></script>
+  <link rel="stylesheet" href="../lib/css/bootstrap.min.css">
+</head>
+<body>
+<div id="app">
+  <!-- 可以传多个参数，也可以用多个过滤器 -->
+  <p>{{ msg | msgFormat('mmp') }}</p>
+</div>
+</body>
+<script>
+
+  // 定义vue全局过滤器
+  Vue.filter('msgFormat', function (msg, arg) {
+    // replace 第一个参数可以用正则  g全局匹配
+    return msg.replace(/荣/g, arg)
+//    return msg.replace('&', arg)
+  })
+
+  var vm = new Vue({
+    el: '#app',
+    data: {
+      msg: 'Navigate & silite 荣'
+    },
+    methods: {}
+  })
+</script>
+</html>

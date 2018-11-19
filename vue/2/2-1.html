@@ -1,0 +1,215 @@
+<!-- 品牌管理案例 -->
+<!-- Vue.js允许自定义过滤器，可被用作一些常见的文本格式化。
+     过滤器可以用在两个地方: mustache插值和v-bind表达式。过滤器应该被添加在JS表达式的尾部，由"管道符"指示
+
+     第一个参数被固定
+     Vue.filter('过滤器的名称', function (data) { } )
+     -->
+
+<!-- 使用ES6中的字符串的新方法 String.prototype.padStart(maxLength, fillString='')
+     或String.prototype.padEnd(maxLength, fillString='') 来填充字符串-->
+
+<!-- vue生命周期 https://cn.vuejs.org/v2/guide/instance.html#%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E5%9B%BE%E7%A4%BA -->
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="../lib/vue.js"></script>
+  <link rel="stylesheet" href="../lib/css/bootstrap.min.css">
+</head>
+<body>
+<div id="app">
+
+  <div class="panel panel-primary">
+    <div class="panel-heading">
+      <h3 class="panel-title">添加</h3>
+    </div>
+    <div class="panel-body form-inline">
+      <label>
+        ID:
+        <input type="text" class="form-control" v-model="id">
+      </label>
+      <label>
+        Name:
+        <!-- 文本框回车触发事件 .提供按键修饰符 如enter -->
+        <input type="text" class="form-control" v-model="name" @keyup.f2="add">
+      </label>
+
+      <!-- @click函数加() 可以在()里传参 -->
+      <input type="button" value="Add" class="btn btn-primary" @click="add">
+
+      <label>
+        Search:
+        <!-- Vue中所有的指令，在调用的时候，都以v-开头 -->
+        <input type="text" class="form-control" v-model="keyword" v-focus v-color="'blue'">
+      </label>
+
+    </div>
+  </div>
+
+  <table class="table table-bordered table-hover table-striped">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Ctime</th>
+        <th>Operation</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr v-for="item in search(keyword)" :key="item.id">
+        <td>{{ item.id }}</td>
+        <td>{{ item.name }}</td>
+        <td>{{ item.ctime | formatTime('s') }}</td>
+        <td>
+          <a href="" @click.prevent="del(item.id)">删除</a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<div id="app2">
+  <h4 v-fontweight="1000" v-fontsize="10">{{ dt | formatTime }}</h4>
+</div>
+</body>
+<script>
+
+  Vue.filter('formatTime', function (date, pattern = '') {
+    // 根据给定的时间字符串，得到特定的时间
+    var dt = new Date(date);
+    var y = dt.getFullYear();
+    var m = (dt.getMonth() + 1).toString().padStart(2, '0');
+    var d = dt.getDate().toString().padStart(2, '0');
+
+    if (pattern.toLowerCase() === 'yyyy-mm-dd') {
+      return `${y}-${m}-${d}`;
+    }
+    else {
+      var hh = dt.getHours().toString().padStart(2, '0');
+      var mm = dt.getMinutes().toString().padStart(2, '0');
+      var ss = dt.getSeconds().toString().padStart(2, '0');
+      return `${y}-${m}-${d} ${hh}:${mm}:${ss}`;
+    }
+  });
+
+//  自定义全局按键修饰符
+  Vue.config.keyCodes.f2 = 113;
+
+//  定义Vue全局指令, 参数2是个对象,有一些指令相关的钩子函数
+  Vue.directive('focus', {
+    bind: function (el) {
+//      指令绑定到元素上时会立即执行，只执行一次
+//      第一个参数永远是被绑定了指令的那个元素，是一个原生的JS对象
+//      刚刚把el放置在DOM树里  还未渲染到浏览器中  调用focus无用
+      el.focus();
+    },
+    inserted: function (el) {
+//      表示元素插入到DOM中的时候，会执行inserted函数，只触发一次
+      el.focus();
+    },
+    updated: function () {
+//      当VNode更新的时候，会执行updated，可能会触发多次
+    }
+  })
+
+  Vue.directive('color', {
+    bind: function (el, binding) {
+//      name: 指令名
+//      value: 指令的绑定值，计算后的结果
+//      expression: 绑定值的字符串形式
+      el.style.color = binding.value;
+    }
+  })
+  
+
+  var vm = new Vue({
+    el: '#app',
+    data: {
+      id: '',
+      name: '',
+      list: [
+        { id: 1, name: 'File', ctime: new Date() },
+        { id: 2, name: 'Edit', ctime: new Date() }
+      ],
+      keyword: ''
+    },
+    methods: {
+      add () {
+        this.list.push({ id: this.id, name: this.name, ctime: new Date() });
+        this.id = this.name = '';
+      },
+      del (id) {
+        this.list.some((item, i) => {
+          if (item.id == id) {
+            this.list.splice(i, 1);
+//            在 数组的some方法中，如果return true，就会立即终止这个数组的后续循环
+            return true;
+          }
+        })
+
+//        var index = this.list.findIndex(item => {
+//          if (item.id == id) {
+//            return true;
+//          }
+//        })
+//        this.list.splice(index, 1);
+
+
+      },
+      search (keyword) {
+
+//        var newList = [];
+
+//        this.list.forEach(item => {
+//          console.log(item);
+////          字符串包含
+//          if (item.name.indexOf(keyword) != -1) {
+//            newList.push(item)
+//          }
+//        });
+//
+//        return newList;
+
+
+//        forEach some filter findIndex 这写都是数组的新方法，
+//        都会对数组中的每一项，进行遍历，执行相关的操作
+        return this.list.filter(item => {
+          if (item.name.includes(keyword)) {
+            return item;
+          }
+        });
+
+      }
+    }
+  })
+
+  var vm2 = new Vue({
+    el: '#app2',
+    data: {
+      dt: new Date()
+    },
+//    定义局部过滤器
+    filters: {
+      formatTime (data, pattern = '') {
+        return data + 'fff'
+      }
+    },
+//    定义私有过滤器
+    directives: {
+      'fontweight': {
+        bind: function (el, binding) {
+          el.style.fontWeight = binding.value;
+        }
+      },
+      //  指令若只用到bind和update可以简写成
+      'fontsize': function (el, binding) {
+        el.style.fontSize = parseInt(binding.value) + 'px';
+      }
+    }
+  })
+</script>
+</html>
