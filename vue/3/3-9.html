@@ -1,0 +1,36 @@
+<!-- 组件中的data和methods -->
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="../lib/vue.js"></script>
+  <script src="../lib/vue-resource.js"></script>
+  <link rel="stylesheet" href="../lib/css/bootstrap.min.css">
+</head>
+<body>
+<div id="app">
+  <my-com1></my-com1>
+</div>
+</body>
+<script>
+  Vue.component('myCom1', {
+    template: '<p>全局组件  {{ msg }}</p>',
+//    data为函数， 且必须返回对象
+    data () {
+      return {
+        msg: '组件中data数据'
+      }
+    }
+  })
+
+  var vm = new Vue({
+    el: '#app',
+    data: {},
+    methods: {}
+  })
+</script>
+</html>

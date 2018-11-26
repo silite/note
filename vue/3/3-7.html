@@ -1,0 +1,61 @@
+<!-- 创建组件全局组件 -->
+<!-- 模块化: 是从代码逻辑的角度进行划分的 -->
+<!-- 组件化: 是从UI界面的角度进行划分的 -->
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="../lib/vue.js"></script>
+  <script src="../lib/vue-resource.js"></script>
+  <link rel="stylesheet" href="../lib/css/bootstrap.min.css">
+</head>
+<body>
+<div id="app">
+  <my-come1></my-come1>
+  <my-come2></my-come2>
+  <my-come3></my-come3>
+  <my-come4></my-come4>
+</div>
+
+<!-- 在被#app控制的外面，使用template远足，定义组件的HTML模板结构 -->
+<template id="tmp1">
+  <div>
+    <h1>通过template元素，在外部定义的组件结构</h1>
+  </div>
+</template>
+</body>
+<script>
+// 1.使用Vue.extend创建全局的组件
+var come1 = Vue.extend({
+//  通过template属性，指定了组件要展示的HTML结构,template必须用div包起来
+  template: '<h3>Vue组件</h3>'
+})
+// 1.2 使用Vue.component('组件的名称', 创建出来的组件模板对象)
+Vue.component('myCome1', come1)
+
+// 1.3 简化
+Vue.component('myCome2', Vue.extend({
+  template: '<h3>Vue组件2</h3>'
+}))
+
+// 2 简化
+Vue.component('myCome3', {
+  template: '<h3>Vue组件3</h3>'
+})
+
+// 3
+Vue.component('myCome4', {
+  template: '#tmp1'
+})
+
+  var vm = new Vue({
+    el: '#app',
+    data: {},
+    methods: {}
+  })
+</script>
+</html>
