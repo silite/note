@@ -40,12 +40,14 @@
     methods: {
       beforeEnter (el) {
 //        起始位置
+        el.style.opacity = 100
         el.style.transform = 'translate(0, 0)'
       },
       enter (el, done) {
 //        如果没有则没有动画
         el.offsetWidth
 
+        el.style.opacity = 0
         el.style.transform = 'translate(150px, 450px)'
         el.style.transition = 'all 1s ease'
 
@@ -55,7 +57,6 @@
       },
       afterEnter (el) {
         this.flag = !this.flag
-        el.style.transform = 'opacity'
       }
     }
   })
