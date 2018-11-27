@@ -10,13 +10,30 @@
   <script src="../lib/vue.js"></script>
   <script src="../lib/vue-resource.js"></script>
   <link rel="stylesheet" href="../lib/css/bootstrap.min.css">
+  <style>
+    .v-enter,
+    .v-leave-to {
+      opacity: 0;
+      transform: translateX(150px);
+    }
+
+    .v-enter-active,
+    .v-leave-active {
+      transition: all 0.5s ease;
+    }
+  </style>
+
 </head>
 <body>
 <div id="app">
   <a href="" @click.prevent="flag='login'">登陆</a>
   <a href="" @click.prevent="flag='register'">注册</a>
   <!-- component 是一个占位符， :is属性，可以用来指定要展示的组件的名称 -->
-  <component :is="flag"></component>
+
+  <!-- 通过mode属性，设置组件切换时候的模式 -->
+  <transition mode="out-in">
+    <component :is="flag"></component>
+  </transition>
 </div>
 </body>
 <script>
