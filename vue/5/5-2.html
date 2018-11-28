@@ -1,0 +1,52 @@
+<!-- watch监听路由的改变 -->
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="../lib/vue.js"></script>
+  <script src="../lib/vue-resource.js"></script>
+  <script src="../lib/vue-router.js"></script>
+  <link rel="stylesheet" href="../lib/css/bootstrap.min.css">
+</head>
+<body>
+<div id="app">
+  <router-link to="/login">登陆</router-link>
+  <router-link to="/register">注册</router-link>
+
+  <router-view></router-view>
+</div>
+</body>
+<script>
+  var login = {
+    template: '<h3>登陆组件</h3>'
+  }
+
+  var register = {
+    template: '<h3>注册组件</h3>'
+  }
+
+  var router = new VueRouter({
+    routes: [
+      { path: '/', redirect: '/login' },
+      { path: '/login', component: login },
+      { path: '/register', component: register }
+    ]
+  })
+
+  var vm = new Vue({
+    el: '#app',
+    data: {},
+    methods: {},
+    router,
+    watch: {
+      '$route.path' (newVal, oldVal) {
+        console.log(newVal)
+      }
+    }
+  })
+</script>
+</html>
