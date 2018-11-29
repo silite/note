@@ -1,3 +1,8 @@
 li {
   list-style: none;
 }
+/* 默认情况下， webpack无法处理css文件中的url地址 */
+/* 需安装url-loader 和 file-loader */
+body {
+  background-image: url("../images/1.png");
+}

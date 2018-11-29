@@ -21,7 +21,9 @@ module.exports = {
   //   这个节点，用于配置所有第三方模块加载器
     rules: [
     //     所有第三方模块的匹配规则 调用规则从右至左
-      { test: /\.css$/, use: ['style-loader', 'css-loader'] }
+      { test: /\.css$/, use: ['style-loader', 'css-loader'] },
+      //  小于limit byte时图片转换为Base64   name打包后文件名不变
+      { test: /\.(jpg|png|gif|bmp|jpeg)/, use: 'url-loader?limit=123&name=[hash:8]-[name].[ext]' }
     ]
   }
 }
