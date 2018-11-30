@@ -19,3 +19,11 @@ $(function () {
 })
 
 //  打包生成的bundle.js并没有存放到实际的物理磁盘上，而是直接托管到了电脑的内存中
+//  webpack只能处理一部分ES6的新语法，需要使用babel可以将高级语法进行适配 npm i babel-core babel-loader babel-plugin-transform-runtime
+//  和babel-preset-env babel-preset-stage-0 两套包
+//  在配置文件中module节点下的rules数组中，添加
+//  在跟目录中创建.babelrc文件[json]
+// {
+//   "presets": ['env', 'stage-0'],
+//   "plugins": ["transform-runtime"]
+// }

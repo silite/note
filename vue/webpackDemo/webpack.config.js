@@ -23,7 +23,9 @@ module.exports = {
     //     所有第三方模块的匹配规则 调用规则从右至左
       { test: /\.css$/, use: ['style-loader', 'css-loader'] },
       //  小于limit byte时图片转换为Base64   name打包后文件名不变
-      { test: /\.(jpg|png|gif|bmp|jpeg)/, use: 'url-loader?limit=123&name=[hash:8]-[name].[ext]' }
+      { test: /\.(jpg|png|gif|bmp|jpeg)/, use: 'url-loader?limit=123&name=[hash:8]-[name].[ext]' },
+    //    用babel适配高级ES6语法,排除node_modules ，防止将里面js打包
+      { test: /\.js$/, use: 'babel-loader', exclude: /node_modules/ }
     ]
   }
 }
