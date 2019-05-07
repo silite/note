@@ -49,3 +49,9 @@
 	priority_queue<int, vector<int>, less<int>> _q;
 	//小顶堆
 	priority_queue<int, vector<int>, greater<int>> _q;
+	//修改第三个参数
+	struct cmp {
+		bool operator() (int a, int b) {
+			return a < b;
+		}
+	};
