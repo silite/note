@@ -51,7 +51,13 @@
 	priority_queue<int, vector<int>, greater<int>> _q;
 	//修改第三个参数
 	struct cmp {
-		bool operator() (int a, int b) {
-			return a < b;
+		bool operator() (Node a, Node b) {
+			return a.x < b.x;
 		}
 	};
+	priority_queue<Node, vector<Node>, cmp> _q;
+	//或重载运算符
+	bool operator < (int a, int b) {
+		return a > b;
+	}
+	priority_queue<Node> _q;
